@@ -1,14 +1,12 @@
 export default class GetShelterDetailsUseCaseOutput {
-    shelterName: string
-    shelterWhatsapp: string
-    ShelterMail: string
-    ShelterPhone: string
-    createdAt: Date
-    updatedAt: Date
+  shelterName: string;
+  shelterWhatsApp: string;
+  shelterEmail: string;
+  shelterPhone: string;
+  createdAt: Date;
+  updatedAt: Date;
 
-    constructor(data: Partial<GetShelterDetailsUseCaseOutput>) {
-        Object.assign(this, data)
-
-    }
-
+  constructor(data: Partial<GetShelterDetailsUseCaseOutput>) {
+    Object.assign(this, data);
+  }
 }

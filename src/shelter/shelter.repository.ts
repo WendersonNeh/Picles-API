@@ -1,15 +1,26 @@
-import { InjectModel } from "@nestjs/mongoose";
-import { shelter } from "./schemas/shelter.schemas";
-import { Model } from "mongoose";
-import IShelterRepository from "./interfaces/shelter.repository.interface";
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import IShelterRepository from './interfaces/shelter.repository.interface';
+import { Shelter } from './schemas/shelter.schema';
 
-export class ShelterRepository implements IShelterRepository{
-    constructor(
-        @InjectModel(shelter.name)
-        private readonly shelterModel: Model<shelter>
-    ){}
+@Injectable()
+export default class ShelterRepository implements IShelterRepository {
+  constructor(
+    @InjectModel(Shelter.name)
+    private shelterModel: Model<Shelter>,
+  ) {}
 
-    async get(): Promise<shelter>{
-        return await this.shelterModel.findOne()
-    }
+  async get(): Promise<Shelter> {
+    return await this.shelterModel.findOne();
+  }
+
+  async update(data: Partial<Shelter>): Promise<void> {
+    await this.shelterModel.updateOne(null, {
+      ...data,
+      updatedAt: new Date()
+    })
+  }
+
+  
 }
